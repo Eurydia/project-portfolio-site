@@ -28,27 +28,24 @@ export const AppFooter: FC = () => {
           },
         })}
       >
-        <Stack
-          sx={(theme) => ({
-            gap: theme.spacing(3),
-          })}
-        >
+        <Stack spacing={3} useFlexGap>
           <Stack
             direction={{
               xs: 'column',
               md: 'row',
             }}
-            sx={(theme) => ({
+            spacing={{
+              xs: 2.5,
+              md: 4,
+            }}
+            useFlexGap
+            sx={{
               alignItems: {
                 xs: 'flex-start',
                 md: 'flex-end',
               },
               justifyContent: 'space-between',
-              gap: {
-                xs: theme.spacing(2.5),
-                md: theme.spacing(4),
-              },
-            })}
+            }}
           >
             <Box>
               <Typography
@@ -72,11 +69,11 @@ export const AppFooter: FC = () => {
 
             <Stack
               direction="row"
+              spacing={2}
               useFlexGap
-              sx={(theme) => ({
+              sx={{
                 flexWrap: 'wrap',
-                gap: theme.spacing(2),
-              })}
+              }}
             >
               <FooterLink href="mailto:tphuttharaksabusiness@gmail.com">
                 Email

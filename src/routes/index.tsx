@@ -202,28 +202,9 @@ function HomeRoute() {
           },
         })}
       >
-        <Stack
-          sx={(theme) => ({
-            gap: {
-              xs: theme.spacing(7),
-              md: theme.spacing(9),
-            },
-          })}
-        >
-          <Stack
-            component="section"
-            sx={(theme) => ({
-              gap: {
-                xs: theme.spacing(4),
-                md: theme.spacing(5),
-              },
-            })}
-          >
-            <Stack
-              sx={(theme) => ({
-                gap: theme.spacing(2),
-              })}
-            >
+        <Stack spacing={{ xs: 7, md: 9 }} useFlexGap>
+          <Stack component="section" spacing={{ xs: 4, md: 5 }} useFlexGap>
+            <Stack spacing={2} useFlexGap>
               <Typography
                 variant="overline"
                 component="p"
@@ -239,11 +220,7 @@ function HomeRoute() {
               </Typography>
             </Stack>
 
-            <Stack
-              sx={(theme) => ({
-                gap: theme.spacing(1.5),
-              })}
-            >
+            <Stack spacing={1.5} useFlexGap>
               <Typography
                 variant="body1"
                 sx={(theme) => ({

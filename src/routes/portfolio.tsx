@@ -204,14 +204,7 @@ function PortfolioRoute() {
           },
         })}
       >
-        <Stack
-          sx={(theme) => ({
-            gap: {
-              xs: theme.spacing(5),
-              md: theme.spacing(6),
-            },
-          })}
-        >
+        <Stack spacing={{ xs: 5, md: 6 }} useFlexGap>
           <ResumeSection id="overview">
             <Typography
               variant="overline"
@@ -229,12 +222,10 @@ function PortfolioRoute() {
 
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
+              spacing={{ xs: 0.75, sm: 2 }}
+              useFlexGap
               sx={(theme) => ({
                 color: theme.palette.text.secondary,
-                gap: {
-                  xs: theme.spacing(0.75),
-                  sm: theme.spacing(2),
-                },
               })}
             >
               <Link
@@ -430,11 +421,11 @@ const PostmortemLinks: FC<{ items: readonly PostmortemLink[] }> = (props) => {
   return (
     <Stack
       direction="row"
+      spacing={1.5}
       useFlexGap
       sx={(theme) => ({
         flexWrap: 'wrap',
         mt: theme.spacing(2),
-        gap: theme.spacing(1.5),
       })}
     >
       {props.items.map((item) => (
