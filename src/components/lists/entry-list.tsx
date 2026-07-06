@@ -1,8 +1,9 @@
-import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { BulletList } from '#/components/common/bullet-list'
 import { SectionLabel } from '#/components/common/section-label'
 import { ShowMore } from '#/components/common/show-more'
+import { ListCard, ListCardIndex } from '#/components/lists/list-card'
 import { useVisibleItems } from '#/hooks/use-visible-items'
 import type { FC } from 'react'
 import type { HomeEntryItem } from '#/types/home'
@@ -19,31 +20,36 @@ export const EntryList: FC<{
     })
 
   return (
-    <Stack spacing={6} useFlexGap>
-      {visibleItems.map((item) => (
-        <Paper
-          variant="outlined"
-          key={item.title}
-          sx={{
-            padding: 4,
-            backgroundColor: (t) => t.palette.background.default,
-          }}
-        >
+    <Stack spacing={3} useFlexGap>
+      {visibleItems.map((item, index) => (
+        <ListCard key={item.title}>
           <Stack spacing={3} useFlexGap>
+            <ListCardIndex
+              value={String(index + 1).padStart(2, '0')}
+              label={item.period}
+            />
             <Stack spacing={1} useFlexGap>
               <Typography variant="siteTitle">{item.title}</Typography>
-              <SectionLabel>{item.period}</SectionLabel>
             </Stack>
-            <Typography variant="siteCopy">{item.intro}</Typography>
-            <Stack spacing={3} useFlexGap>
-              {item.notes.map((note) => (
-                <Typography key={note} variant="siteFine" color="textSecondary">
-                  {note}
-                </Typography>
-              ))}
+            <Typography variant="siteCopy" color="textSecondary">
+              {item.intro}
+            </Typography>
+            <BulletList items={item.notes} />
+            <Stack
+              spacing={1}
+              useFlexGap
+              sx={(theme) => ({
+                borderTop: `1px solid ${theme.palette.divider}`,
+                paddingTop: theme.spacing(1.75),
+              })}
+            >
+              <SectionLabel>Stack</SectionLabel>
+              <Typography variant="siteFine" color="textSecondary">
+                {item.tools}
+              </Typography>
             </Stack>
           </Stack>
-        </Paper>
+        </ListCard>
       ))}
       <ShowMore
         hiddenCount={hiddenCount}

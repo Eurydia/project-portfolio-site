@@ -1,11 +1,11 @@
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { SectionLabel } from '#/components/common/section-label'
+import { BulletList } from '#/components/common/bullet-list'
 import { ShowMore } from '#/components/common/show-more'
+import { ListCard, ListCardIndex } from '#/components/lists/list-card'
 import { useVisibleItems } from '#/hooks/use-visible-items'
 import type { FC } from 'react'
 import type { HomeExperienceItem } from '#/types/home'
-import Paper from '@mui/material/Paper'
 
 export const ExperienceList: FC<{
   items: readonly HomeExperienceItem[]
@@ -19,29 +19,23 @@ export const ExperienceList: FC<{
     })
 
   return (
-    <Stack spacing={6} useFlexGap>
-      {visibleItems.map((item) => (
-        <Paper
-          variant="outlined"
-          key={item.title}
-          sx={{
-            padding: 4,
-            backgroundColor: (t) => t.palette.background.default,
-          }}
-        >
+    <Stack spacing={3} useFlexGap>
+      {visibleItems.map((item, index) => (
+        <ListCard key={item.title}>
           <Stack spacing={3} useFlexGap>
+            <ListCardIndex
+              value={String(index + 1).padStart(2, '0')}
+              label={item.period}
+            />
             <Stack spacing={1} useFlexGap>
               <Typography variant="siteTitle">{item.title}</Typography>
-              <SectionLabel>{item.period}</SectionLabel>
             </Stack>
-            <Typography variant="siteCopy">{item.organization}</Typography>
-            {item.details.map((detail) => (
-              <Typography key={detail} variant="siteFine" color="textSecondary">
-                {detail}
-              </Typography>
-            ))}
+            <Typography variant="siteCopy" color="textSecondary">
+              {item.organization}
+            </Typography>
+            <BulletList items={item.details} />
           </Stack>
-        </Paper>
+        </ListCard>
       ))}
       <ShowMore
         hiddenCount={hiddenCount}

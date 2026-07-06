@@ -5,7 +5,7 @@ export const GridBackground: FC<{ children: ReactNode }> = (props) => {
   return (
     <Box
       sx={(theme) => {
-        const gridCell = theme.spacing(12)
+        const gridCell = theme.spacing(10)
         const gridLine = theme.alpha(theme.palette.primary.main, 0.12)
 
         return {

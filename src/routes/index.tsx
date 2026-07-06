@@ -1,12 +1,13 @@
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { createFileRoute } from '@tanstack/react-router'
 import { PageSection } from '#/components/layout/page-section'
 import { CredentialList } from '#/components/lists/credential-list'
 import { EntryList } from '#/components/lists/entry-list'
 import { ExperienceList } from '#/components/lists/experience-list'
 import { AppFooter } from '#/components/app-footer'
+import { AppHeader } from '#/components/app-header'
+import { LandingHero } from '#/components/landing/landing-hero'
 
 export const Route = createFileRoute('/')({ component: HomeRoute })
 
@@ -36,6 +37,19 @@ const maintainedProjects = [
     ],
     tools: 'React, TypeScript, TanStack Router, MUI, content pipeline',
     postmortem: '/catalog/gdgoc-elte',
+  },
+  {
+    title: 'Textile',
+    period: 'December 2025 - Present',
+    intro:
+      'Digital-garden experiment that uses LaTeX as the source format instead of Markdown.',
+    notes: [
+      'Built around the idea that technical notes can keep more of the structure and feel of TeX documents.',
+      'Separated the site engine from content so the writing format can stay closer to the source material.',
+      'Kept the project honest about the parts where browser rendering and document semantics do not line up cleanly.',
+    ],
+    tools: 'LaTeX source format, digital garden pipeline, frontend rendering',
+    postmortem: '/catalog/textile',
   },
 ] as const
 
@@ -91,6 +105,100 @@ const builtProjects = [
     ],
     tools: 'TypeScript, Ohm.js, Monaco, KaTeX, visx',
     postmortem: '/catalog/propositional-logic-engine',
+  },
+  {
+    title: 'Student Event Q&A Platform',
+    period: '2026',
+    intro:
+      'Event Q&A system for collecting, grouping, timing, and moderating questions outside a generic form workflow.',
+    notes: [
+      'Built the app flow around sessions, access control, QR entry, countdown timing, and controlled participation.',
+      'Used authentication, database state, rate limiting, and validation instead of treating the event as a static survey.',
+      'Kept client and server concerns explicit enough for the postmortem to cover boundaries and tradeoffs later.',
+    ],
+    tools:
+      'TanStack Start, React, TypeScript, MUI, Prisma, Better Auth, Redis, Zod',
+    postmortem: '/catalog/student-event-qa-platform',
+  },
+  {
+    title: 'Yoga Correct',
+    period: '2026',
+    intro:
+      'Desktop yoga-feedback app built around camera input, exercise state, and local model execution.',
+    notes: [
+      'Worked through Electron main, preload, and renderer boundaries for a desktop interface rather than a browser-only demo.',
+      'Integrated ONNX runtime, guided exercise flows, timers, markdown content, media playback, and user feedback surfaces.',
+      'Designed for behavior that has to remain legible while webcam/model output changes over time.',
+    ],
+    tools:
+      'Electron, electron-vite, React, TypeScript, MUI, TanStack Router, ONNX Runtime, Zod',
+    postmortem: '/catalog/yoga-correct',
+  },
+  {
+    title: 'Basic Statistics Explorer',
+    period: '2025',
+    intro:
+      'Interactive statistics explorer for classroom-style data inspection, charts, and formula-supported explanation.',
+    notes: [
+      'Built visual exploration around charting, box plots, array operations, and MathJax notation.',
+      'Used chart libraries where the hard part was visual behavior rather than reimplementing plotting primitives.',
+      'Kept the interface focused on inspecting data and distributions instead of turning statistics into a slide deck.',
+    ],
+    tools: 'React, TypeScript, Vite, MUI, Chart.js, D3 Array, MathJax',
+    postmortem: '/catalog/basic-statistics-explorer',
+  },
+  {
+    title: 'Supply and Demand Explorer',
+    period: '2025',
+    intro:
+      'Interactive economics explorer for editing tabular data and seeing supply-demand behavior through charts.',
+    notes: [
+      'Combined spreadsheet-like input with chart output so changes in data remain visible immediately.',
+      'Used routing, tabular editing, and chart components to keep the workflow closer to an analysis tool than a static page.',
+      'Kept generated data and test tooling available around the interface work.',
+    ],
+    tools:
+      'React, TypeScript, Vite, MUI, TanStack Router, Handsontable, Recharts, Vitest',
+    postmortem: '/catalog/supply-and-demand-explorer',
+  },
+  {
+    title: 'DSP Calculator',
+    period: '2022 - 2025',
+    intro:
+      'Calculator for Dyson Sphere Program item planning, backed by a separate item-registry package.',
+    notes: [
+      'Built a React interface around a reusable game item registry instead of hard-coding every calculation into the page.',
+      'Published and versioned the app as a public project rather than keeping it as a throwaway spreadsheet replacement.',
+      'Worked through enough iteration to reach a maintained 2.x version line.',
+    ],
+    tools: 'React, TypeScript, Vite, MUI, gh-pages, @eurydos/dsp-item-registry',
+    postmortem: '/catalog/dsp-calculator',
+  },
+  {
+    title: 'Sorting Algorithm Visualizer',
+    period: '2025',
+    intro:
+      'Sorting visualizer that exposes algorithm steps instead of only animating bars moving around.',
+    notes: [
+      'Implemented the interface around comparison and swap descriptions so the algorithm state is readable.',
+      'Covered common sorting families including bubble, insertion, selection, merge, heap, counting, and radix sort.',
+      'Kept the visualizer small enough to explain the algorithms without turning it into a general animation framework.',
+    ],
+    tools: 'React, TypeScript, Vite, MUI, React Router',
+    postmortem: '/catalog/sorting-algorithm-visualizer',
+  },
+  {
+    title: 'Alexandrite',
+    period: '2025',
+    intro:
+      'Desktop unit-conversion calculator built as a small Tauri application.',
+    notes: [
+      'Built the conversion interface as a local desktop app rather than a hosted web page.',
+      'Kept the stack deliberately small: React and TypeScript in the frontend, Tauri for the shell.',
+      'Used the project to work through packaging a focused utility rather than extending a broad dashboard.',
+    ],
+    tools: 'Tauri, React, TypeScript, Vite',
+    postmortem: '/catalog/alexandrite',
   },
 ] as const
 
@@ -172,24 +280,45 @@ function HomeRoute() {
       })}
     >
       <Stack spacing={{ xs: 7, md: 9 }} useFlexGap>
-        <Typography variant="siteDisplay">Thanakorn Phuttharaksa</Typography>
-        <PageSection id="maintained" title="Projects I maintain">
+        <AppHeader />
+        <LandingHero />
+        <PageSection
+          id="maintained"
+          title="Projects I maintain"
+          count={maintainedProjects.length}
+        >
           <EntryList items={maintainedProjects} />
         </PageSection>
 
-        <PageSection id="built" title="Other projects I have built">
+        <PageSection
+          id="built"
+          title="Other projects I have built"
+          count={builtProjects.length}
+        >
           <EntryList items={builtProjects} />
         </PageSection>
 
-        <PageSection id="research" title="Research and notes">
+        <PageSection
+          id="research"
+          title="Research and notes"
+          count={researchItems.length}
+        >
           <EntryList items={researchItems} />
         </PageSection>
 
-        <PageSection id="experience" title="Experience">
+        <PageSection
+          id="experience"
+          title="Experience"
+          count={experienceItems.length}
+        >
           <ExperienceList items={experienceItems} />
         </PageSection>
 
-        <PageSection id="education" title="Education and certifications">
+        <PageSection
+          id="education"
+          title="Education and certifications"
+          count={educationItems.length}
+        >
           <CredentialList items={educationItems} initialVisibleItems={3} />
         </PageSection>
         <AppFooter />

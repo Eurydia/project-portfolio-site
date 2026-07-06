@@ -1,7 +1,7 @@
-import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { ShowMore } from '#/components/common/show-more'
+import { ListCard, ListCardIndex } from '#/components/lists/list-card'
 import { useVisibleItems } from '#/hooks/use-visible-items'
 import type { FC } from 'react'
 import type { CredentialItem } from '#/types/credential'
@@ -18,23 +18,17 @@ export const CredentialList: FC<{
     })
 
   return (
-    <Stack spacing={6} useFlexGap>
-      {visibleItems.map((item) => (
-        <Paper
-          variant="outlined"
-          key={item.title}
-          sx={{
-            padding: 4,
-            backgroundColor: (t) => t.palette.background.default,
-          }}
-        >
+    <Stack spacing={3} useFlexGap>
+      {visibleItems.map((item, index) => (
+        <ListCard key={item.title}>
           <Stack spacing={3} useFlexGap>
+            <ListCardIndex value={String(index + 1).padStart(2, '0')} />
             <Typography variant="siteTitle">{item.title}</Typography>
             <Typography variant="siteFine" color="textSecondary">
               {item.body}
             </Typography>
           </Stack>
-        </Paper>
+        </ListCard>
       ))}
       <ShowMore
         hiddenCount={hiddenCount}
