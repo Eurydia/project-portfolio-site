@@ -1,7 +1,6 @@
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { ShowMore } from '#/components/common/show-more'
-import { ListCard, ListCardIndex } from '#/components/lists/list-card'
+import { ListCard } from '#/components/lists/list-card'
 import { useVisibleItems } from '#/hooks/use-visible-items'
 import type { FC } from 'react'
 import type { CredentialItem } from '#/types/credential'
@@ -20,15 +19,12 @@ export const CredentialList: FC<{
   return (
     <Stack spacing={3} useFlexGap>
       {visibleItems.map((item, index) => (
-        <ListCard key={item.title}>
-          <Stack spacing={3} useFlexGap>
-            <ListCardIndex value={String(index + 1).padStart(2, '0')} />
-            <Typography variant="siteTitle">{item.title}</Typography>
-            <Typography variant="siteFine" color="textSecondary">
-              {item.body}
-            </Typography>
-          </Stack>
-        </ListCard>
+        <ListCard
+          key={item.title}
+          index={String(index + 1).padStart(2, '0')}
+          title={item.title}
+          body={item.body}
+        />
       ))}
       <ShowMore
         hiddenCount={hiddenCount}

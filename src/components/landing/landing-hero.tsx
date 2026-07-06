@@ -11,8 +11,8 @@ export const LandingHero: FC = () => {
         maxInlineSize: theme.spacing(80),
       })}
     >
-      <Typography variant="siteMark" color="textSecondary">
-        Portfolio / selected record
+      <Typography variant="siteMark" color="primary">
+        Portfolio
       </Typography>
       <Typography variant="siteDisplay">Thanakorn Phuttharaksa</Typography>
     </Stack>

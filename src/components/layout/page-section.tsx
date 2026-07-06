@@ -39,7 +39,7 @@ export const PageSection: FC<{
       >
         <Typography variant="siteSection">{props.title}</Typography>
         {typeof props.count === 'number' && (
-          <Typography variant="siteSmall" color="textSecondary">
+          <Typography variant="siteSmall" color="primary">
             {formatEntryCount(props.count)}
           </Typography>
         )}

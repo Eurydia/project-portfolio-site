@@ -1,19 +1,18 @@
-import Link from '@mui/material/Link'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import type { FC } from 'react'
+import { RouterLink } from './router/router-link'
 
 const navItems = [
   {
-    href: '#maintained',
+    hash: 'maintained',
     label: 'Works',
   },
   {
-    href: '#research',
+    hash: 'research',
     label: 'Research',
   },
   {
-    href: '#education',
+    hash: 'education',
     label: 'Background',
   },
 ] as const
@@ -36,18 +35,18 @@ export const AppHeader: FC = () => {
             xs: 'flex-start',
             sm: 'baseline',
           },
-          justifyContent: 'space-between',
+          justifyContent: 'flex-end',
           borderBottom: `1px solid ${theme.palette.text.primary}`,
           paddingBottom: theme.spacing(1.5),
         })}
       >
-        <Typography variant="siteTitle">Thanakorn Phuttharaksa</Typography>
         <Stack direction="row" spacing={3.5} useFlexGap>
           {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              underline="none"
+            <RouterLink
+              to="."
+              hash={() => item.hash}
+              key={item.hash}
+              underline="always"
               variant="siteSmall"
               color="textSecondary"
               sx={{
@@ -55,7 +54,7 @@ export const AppHeader: FC = () => {
               }}
             >
               {item.label}
-            </Link>
+            </RouterLink>
           ))}
         </Stack>
       </Stack>
