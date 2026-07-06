@@ -9,15 +9,15 @@ export const PageSection: FC<{
   children: ReactNode
 }> = (props) => {
   return (
-    <Stack id={props.id} component="section" spacing={4} useFlexGap>
+    <Stack id={props.id} spacing={4} useFlexGap>
       <Stack spacing={1} useFlexGap>
-        <Typography variant="h2" component="h2">
+        <Typography sx={(theme) => theme.typography.siteSection}>
           {props.title}
         </Typography>
         <Typography
-          variant="body1"
           sx={(theme) => ({
             color: theme.palette.text.secondary,
+            ...theme.typography.siteCopy,
           })}
         >
           {props.body}

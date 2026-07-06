@@ -20,6 +20,7 @@ export const ShowMore: FC<{
       onClick={props.onClick}
       sx={(theme) => ({
         color: theme.palette.primary.main,
+        ...theme.typography.siteAction,
       })}
     >
       Show {props.nextVisibleCount} more

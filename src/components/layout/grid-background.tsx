@@ -1,20 +1,19 @@
 import Box from '@mui/material/Box'
-import { alpha } from '@mui/material/styles'
 import type { FC, ReactNode } from 'react'
 
 export const GridBackground: FC<{ children: ReactNode }> = (props) => {
   return (
     <Box
-      sx={(theme) => ({
-        minHeight: '100dvh',
-        bgcolor: theme.palette.background.default,
-        backgroundImage: [
-          `linear-gradient(${alpha(theme.palette.primary.main, 0.08)} 1px, ${alpha(theme.palette.primary.main, 0)} 1px)`,
-          `linear-gradient(90deg, ${alpha(theme.palette.primary.main, 0.08)} 1px, ${alpha(theme.palette.primary.main, 0)} 1px)`,
-        ].join(', '),
-        backgroundPosition: 'center top',
-        backgroundSize: theme.spacing(4),
-      })}
+      sx={(theme) => {
+        const gridCell = theme.spacing(12)
+        const gridLine = theme.alpha(theme.palette.primary.main, 0.12)
+
+        return {
+          minHeight: '100dvh',
+          backgroundImage: `linear-gradient(to right, ${gridLine} 1px, transparent 1px), linear-gradient(to bottom, ${gridLine} 1px, transparent 1px)`,
+          backgroundSize: `${gridCell} ${gridCell}`,
+        }
+      }}
     >
       {props.children}
     </Box>

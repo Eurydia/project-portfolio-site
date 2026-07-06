@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 import Link from '@mui/material/Link'
 import { alpha } from '@mui/material/styles'
 import type { FC } from 'react'
@@ -9,9 +9,10 @@ export const FloatingSectionNav: FC<{
   label: string
 }> = (props) => {
   return (
-    <Box
-      component="nav"
+    <Stack
       aria-label={props.label}
+      spacing={1.35}
+      useFlexGap
       sx={(theme) => ({
         position: 'fixed',
         top: '50%',
@@ -27,7 +28,6 @@ export const FloatingSectionNav: FC<{
         transform: 'translateY(-50%)',
         flexDirection: 'column',
         alignItems: 'flex-end',
-        gap: theme.spacing(1.35),
       })}
     >
       {props.items.map((item) => (
@@ -49,6 +49,6 @@ export const FloatingSectionNav: FC<{
           })}
         />
       ))}
-    </Box>
+    </Stack>
   )
 }

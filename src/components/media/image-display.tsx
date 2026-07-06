@@ -20,6 +20,10 @@ export const ImageDisplay: FC<{
       sx={(theme) => ({
         display: 'block',
         inlineSize: '100%',
+        maxInlineSize: theme.spacing(40),
+        marginInlineStart: {
+          md: 'auto',
+        },
         aspectRatio: `${imageWidth} / ${imageHeight}`,
         objectFit: 'cover',
         border: 1,

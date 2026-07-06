@@ -9,7 +9,6 @@ import type { FC, ReactNode } from 'react'
 export const AppFooter: FC = () => {
   return (
     <Box
-      component="footer"
       sx={(theme) => ({
         bgcolor: alpha(theme.palette.primary.main, 0.06),
         borderTop: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
@@ -49,18 +48,17 @@ export const AppFooter: FC = () => {
           >
             <Box>
               <Typography
-                variant="overline"
-                component="p"
                 sx={(theme) => ({
                   color: theme.palette.primary.main,
+                  ...theme.typography.siteMark,
                 })}
               >
                 Thanakorn Phuttharaksa
               </Typography>
               <Typography
-                variant="body2"
                 sx={(theme) => ({
                   color: theme.palette.text.secondary,
+                  ...theme.typography.siteFine,
                 })}
               >
                 Portfolio and project notes.
@@ -95,9 +93,9 @@ export const AppFooter: FC = () => {
             })}
           >
             <Typography
-              variant="caption"
               sx={(theme) => ({
                 color: theme.palette.text.secondary,
+                ...theme.typography.siteSmall,
               })}
             >
               {`© ${new Date().getFullYear()} Thanakorn Phuttharaksa`}
@@ -121,9 +119,9 @@ const FooterLink: FC<{
       target={props.target}
       rel={props.rel}
       underline="always"
-      variant="subtitle2"
       sx={(theme) => ({
         color: theme.palette.text.primary,
+        ...theme.typography.siteLink,
       })}
     >
       {props.children}

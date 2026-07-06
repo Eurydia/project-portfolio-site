@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
+import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { SectionLabel } from '#/components/common/section-label'
 import { ShowMore } from '#/components/common/show-more'
@@ -13,8 +13,8 @@ import type { HomeEntryItem } from '#/types/home'
 
 export const EntryList: FC<{
   items: readonly HomeEntryItem[]
-  initialVisibleItems: number
-  visibleItemIncrement: number
+  initialVisibleItems?: number
+  visibleItemIncrement?: number
 }> = (props) => {
   const { hiddenCount, nextVisibleCount, showMore, visibleItems } =
     useVisibleItems(props.items, {
@@ -23,71 +23,76 @@ export const EntryList: FC<{
     })
 
   return (
-    <Box>
-      <List disablePadding>
-        {visibleItems.map((item, index) => (
-          <ListItem
-            key={item.title}
-            alignItems="flex-start"
-            divider={index < visibleItems.length - 1}
-          >
-            <Grid container>
-              <Grid size={{ xs: 12, md: 8 }}>
-                <Typography variant="h3" component="h3">
-                  {item.title}
-                </Typography>
-                <SectionLabel>{item.period}</SectionLabel>
+    <Box sx={{ minInlineSize: 0 }}>
+      <Stack divider={<Divider />} spacing={3} useFlexGap>
+        {visibleItems.map((item) => (
+          <Box key={item.title} sx={{ minInlineSize: 0 }}>
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={3}
+              sx={{ inlineSize: '100%', minInlineSize: 0 }}
+            >
+              <Grid size={{ xs: 12, md: 8 }} sx={{ minInlineSize: 0 }}>
+                <Stack spacing={1.5} useFlexGap>
+                  <Box>
+                    <Typography sx={(theme) => theme.typography.siteTitle}>
+                      {item.title}
+                    </Typography>
+                    <SectionLabel>{item.period}</SectionLabel>
+                  </Box>
 
-                <Typography variant="body1" component="p">
-                  {item.intro}
-                </Typography>
+                  <Typography sx={(theme) => theme.typography.siteCopy}>
+                    {item.intro}
+                  </Typography>
 
-                <Box component="ul">
-                  {item.notes.map((note) => (
+                  <Stack spacing={0.75} useFlexGap>
+                    {item.notes.map((note) => (
+                      <Typography
+                        key={note}
+                        sx={(theme) => ({
+                          color: theme.palette.text.secondary,
+                          ...theme.typography.siteFine,
+                        })}
+                      >
+                        {note}
+                      </Typography>
+                    ))}
+                  </Stack>
+
+                  <Box>
+                    <Typography sx={(theme) => theme.typography.siteMark}>
+                      Stack
+                    </Typography>
                     <Typography
-                      key={note}
-                      component="li"
-                      variant="body2"
                       sx={(theme) => ({
                         color: theme.palette.text.secondary,
+                        ...theme.typography.siteFine,
                       })}
                     >
-                      {note}
+                      {item.tools}
                     </Typography>
-                  ))}
-                </Box>
+                  </Box>
 
-                <Typography variant="overline" component="p">
-                  Stack
-                </Typography>
-                <Typography
-                  variant="body2"
-                  component="p"
-                  sx={(theme) => ({
-                    color: theme.palette.text.secondary,
-                  })}
-                >
-                  {item.tools}
-                </Typography>
-
-                <Link
-                  href={item.postmortem}
-                  underline="always"
-                  variant="subtitle2"
-                  sx={(theme) => ({
-                    color: theme.palette.primary.main,
-                  })}
-                >
-                  Read postmortem
-                </Link>
+                  <Link
+                    href={item.postmortem}
+                    underline="always"
+                    sx={(theme) => ({
+                      color: theme.palette.primary.main,
+                      ...theme.typography.siteLink,
+                    })}
+                  >
+                    Read postmortem
+                  </Link>
+                </Stack>
               </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
+              <Grid size={{ xs: 12, md: 4 }} sx={{ minInlineSize: 0 }}>
                 <ImageDisplay label={item.title} src={item.imageSrc} />
               </Grid>
             </Grid>
-          </ListItem>
+          </Box>
         ))}
-      </List>
+      </Stack>
       <ShowMore
         hiddenCount={hiddenCount}
         nextVisibleCount={nextVisibleCount}

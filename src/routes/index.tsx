@@ -4,31 +4,12 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { createFileRoute } from '@tanstack/react-router'
 import { PageSection } from '#/components/layout/page-section'
-import { FloatingSectionNav } from '#/components/navigation/floating-section-nav'
 import { CredentialList } from '#/components/lists/credential-list'
 import { InlineRouterLink } from '#/components/router/inline-router-link'
 import { EntryList } from '#/components/home/entry-list'
 import { ExperienceList } from '#/components/home/experience-list'
 
 export const Route = createFileRoute('/')({ component: HomeRoute })
-
-const sectionNav = [
-  { id: 'maintained', label: 'Maintained' },
-  { id: 'built', label: 'Built' },
-  { id: 'research', label: 'Research' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'education', label: 'Education' },
-] as const
-
-const listDisplayOptions = {
-  initialVisibleItems: 2,
-  visibleItemIncrement: 5,
-} as const
-
-const educationDisplayOptions = {
-  ...listDisplayOptions,
-  initialVisibleItems: 3,
-} as const
 
 const maintainedProjects = [
   {
@@ -182,11 +163,9 @@ const educationItems = [
 
 function HomeRoute() {
   return (
-    <Box component="main">
-      <FloatingSectionNav items={sectionNav} label="Landing page sections" />
-
+    <Box>
       <Container
-        maxWidth="lg"
+        maxWidth="md"
         sx={(theme) => ({
           px: {
             xs: theme.spacing(2.5),
@@ -203,28 +182,27 @@ function HomeRoute() {
         })}
       >
         <Stack spacing={{ xs: 7, md: 9 }} useFlexGap>
-          <Stack component="section" spacing={{ xs: 4, md: 5 }} useFlexGap>
+          <Stack spacing={{ xs: 4, md: 5 }} useFlexGap>
             <Stack spacing={2} useFlexGap>
               <Typography
-                variant="overline"
-                component="p"
                 sx={(theme) => ({
                   color: theme.palette.primary.main,
+                  ...theme.typography.siteMark,
                 })}
               >
                 Eurydia
               </Typography>
 
-              <Typography variant="h1" component="h1">
+              <Typography sx={(theme) => theme.typography.siteDisplay}>
                 Thanakorn Phuttharaksa
               </Typography>
             </Stack>
 
             <Stack spacing={1.5} useFlexGap>
               <Typography
-                variant="body1"
                 sx={(theme) => ({
                   color: theme.palette.text.secondary,
+                  ...theme.typography.siteCopy,
                 })}
               >
                 If you were invited here and you are in a hurry, start with the{' '}
@@ -234,18 +212,18 @@ function HomeRoute() {
                 of my work.
               </Typography>
               <Typography
-                variant="body1"
                 sx={(theme) => ({
                   color: theme.palette.text.secondary,
+                  ...theme.typography.siteCopy,
                 })}
               >
                 If you were invited here and you are not in a hurry, look
                 around.
               </Typography>
               <Typography
-                variant="body1"
                 sx={(theme) => ({
                   color: theme.palette.text.secondary,
+                  ...theme.typography.siteCopy,
                 })}
               >
                 If you stumbled here, look around anyway.
@@ -258,7 +236,7 @@ function HomeRoute() {
             title="Projects I maintain"
             body="These are systems I built and still treat as ongoing responsibility. The compact page gives the short version; this page gives them enough room to be read properly."
           >
-            <EntryList items={maintainedProjects} {...listDisplayOptions} />
+            <EntryList items={maintainedProjects} />
           </PageSection>
 
           <PageSection
@@ -266,7 +244,7 @@ function HomeRoute() {
             title="Other projects I have built"
             body="Finished work that should be read as work, not as a stack inventory. Each project links to a postmortem page where the repository, screenshots, and extra details can live."
           >
-            <EntryList items={builtProjects} {...listDisplayOptions} />
+            <EntryList items={builtProjects} />
           </PageSection>
 
           <PageSection
@@ -274,7 +252,7 @@ function HomeRoute() {
             title="Research and notes"
             body="Research-adjacent work belongs outside the normal project list because the interesting part is often method, constraint, or presentation rather than deployment."
           >
-            <EntryList items={researchItems} {...listDisplayOptions} />
+            <EntryList items={researchItems} />
           </PageSection>
 
           <PageSection
@@ -282,7 +260,7 @@ function HomeRoute() {
             title="Experience"
             body="Roles where the work was not only code: delivery, teaching, review, coordination, and explaining things to other people."
           >
-            <ExperienceList items={experienceItems} {...listDisplayOptions} />
+            <ExperienceList items={experienceItems} />
           </PageSection>
 
           <PageSection
@@ -290,10 +268,7 @@ function HomeRoute() {
             title="Education and certifications"
             body="Degree, scholarship, and language qualifications. Useful context, kept separate from the project sections."
           >
-            <CredentialList
-              items={educationItems}
-              {...educationDisplayOptions}
-            />
+            <CredentialList items={educationItems} initialVisibleItems={3} />
           </PageSection>
         </Stack>
       </Container>
