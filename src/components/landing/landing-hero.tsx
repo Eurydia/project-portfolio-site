@@ -1,7 +1,16 @@
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { alpha } from '@mui/material/styles'
+import { RotatingHeroText } from '#/components/landing/rotating-hero-text'
 import type { FC } from 'react'
+
+const heroPhrases = [
+  'software engineer.',
+  'Stipendium Hungaricum scholar.',
+  'ELTE alumnus.',
+  'research software builder.',
+  'educational tools maintainer.',
+] as const
 
 export const LandingHero: FC = () => {
   return (
@@ -37,15 +46,7 @@ export const LandingHero: FC = () => {
         <Typography variant="siteDisplay" color="textPrimary">
           Computer science graduate,
         </Typography>
-        <Typography
-          variant="siteDisplay"
-          color="primary"
-          sx={{
-            fontStyle: 'italic',
-          }}
-        >
-          software engineer.
-        </Typography>
+        <RotatingHeroText phrases={heroPhrases} />
       </Stack>
 
       <Typography variant="siteCopy" color="textSecondary">

@@ -24,9 +24,7 @@ export const EntryList: FC<{
           index={String(index + 1).padStart(2, '0')}
           label={item.period}
           card={item.card}
-          readMore={{
-            article: item.detailed,
-          }}
+          readMore={item.detailed ? { article: item.detailed } : undefined}
         />
       ))}
       <ShowMore

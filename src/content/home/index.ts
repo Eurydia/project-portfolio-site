@@ -44,10 +44,6 @@ const toHomeEntryWithOrder = (
     throw new Error(`Missing card.md for ${key}`)
   }
 
-  if (!group.detailed) {
-    throw new Error(`Missing detailed.md for ${key}`)
-  }
-
   if (group.card.section !== section) {
     return undefined
   }
@@ -57,7 +53,7 @@ const toHomeEntryWithOrder = (
     order: group.card.order,
     period: group.card.period || undefined,
     card: group.card.content,
-    detailed: group.detailed.content,
+    detailed: group.detailed?.content,
   }
 }
 
