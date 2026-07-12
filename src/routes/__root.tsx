@@ -11,7 +11,7 @@ import { theme } from '../theme'
 import { GridBackground } from '#/components/layout/grid-background'
 import type { ReactNode } from 'react'
 
-const siteUrl = 'https://portfolio.eurydia.work/'
+const siteUrl = 'https://eurydia.work/'
 const siteTitle = 'Thanakorn Phuttharaksa | Portfolio'
 const siteDescription =
   'Software portfolio for Thanakorn Phuttharaksa: maintained systems, finished projects, research notes, experience, education, and certifications.'

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio.eurydia.work/sitemap.xml
+Sitemap: https://eurydia.work/sitemap.xml
